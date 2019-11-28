@@ -1,10 +1,10 @@
 interface DailyRecordDto {
     id: number;
     day: number;
-    arrivalTime: Date;
-    leaveTime: Date;
-    spentOutsideInMinutes: number;
-    deltaFromAccountingSystemInMinutes: number;
+    arrived: string;
+    left: string;
+    spentOutside: string;
+    deltaFromAccountingSystem: string;
     isWorkingDay: boolean;
-    dailyDeltaInMinutes: number;
+    dailyDelta: string;
 }

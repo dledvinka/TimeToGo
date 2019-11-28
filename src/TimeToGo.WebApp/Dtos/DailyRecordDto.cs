@@ -10,11 +10,11 @@ namespace TimeToGo.WebApp.Dtos
     {
         public int Id { get; set; }
         public int Day { get; set; }
-        public DateTime? ArrivalTime { get; set; }
-        public DateTime? LeaveTime { get; set; }
-        public double? SpentOutsideInMinutes { get; set; }
-        public double? DeltaFromAccountingSystemInMinutes { get; set; }
-        public bool IsWorkingDay { get; internal set; }
-        public double DailyDeltaInMinutes { get; internal set; }
+        public string Arrived { get; set; }
+        public string Left { get; set; }
+        public string SpentOutside { get; set; }
+        public string DeltaFromAccountingSystem { get; set; }
+        public bool IsWorkingDay { get; set; }
+        public string DailyDelta { get; set; }
     }
 }

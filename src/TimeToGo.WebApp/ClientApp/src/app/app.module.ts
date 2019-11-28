@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { MonthlyRecordEditorComponent } from './monthly-record-editor/monthly-record-editor.component';
+import { MonthlyRecordComponent } from './monthly-record/monthly-record.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MonthlyRecordEditorComponent } from './monthly-record-editor/monthly-re
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    MonthlyRecordEditorComponent
+    MonthlyRecordEditorComponent,
+    MonthlyRecordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,7 +30,7 @@ import { MonthlyRecordEditorComponent } from './monthly-record-editor/monthly-re
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'monthly-record', component: MonthlyRecordEditorComponent },
+      { path: 'monthly-record', component: MonthlyRecordComponent },
     ])
   ],
   providers: [],

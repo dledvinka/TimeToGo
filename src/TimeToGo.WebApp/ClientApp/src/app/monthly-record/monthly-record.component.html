@@ -1,0 +1,45 @@
+<div *ngIf="mr">
+    <h1>{{mr.year}}/{{mr.month}}</h1>
+    <h4>Daily records</h4>
+    <table>
+        <tr>
+            <th>Day</th>
+            <th>Arrival</th>
+            <th>Leave</th>
+            <th>Spent outside</th>
+            <th>Delta</th>
+            <th>Daily delta</th>
+            <th>Working day</th>
+        </tr>
+        <tr class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
+            <td>
+                {{dr.day}}
+            </td>
+            <td>
+                <input type="time" class="form-control" [value]="dr.arrived"
+                    (input)="dr.arrived = $event.target.value">
+
+                    <!-- <input type="time" class="form-control" [(ngModel)]="dr.arrivalTimeString"> -->
+            </td>
+            <td>
+                <input type="time" class="form-control" [value]="dr.left"
+                    (input)="dr.left = $event.target.value">
+            </td>
+            <td>
+                <input type="time" class="form-control" [value]="dr.spentOutside"
+                    (input)="dr.spentOutside = $event.target.value">
+            </td>
+            <td>
+                <input type="time" class="form-control" [value]="deltaFromAccountingSystem"
+                    (input)="dr.deltaFromAccountingSystem = $event.target.value">
+            </td>
+            <td>
+                {{dr.dailyDelta}}
+            </td>
+            <td>
+                    <input type="checkbox" class="form-control" [value]="isWorkingDay">
+                </td>
+        </tr>
+    </table>
+    <button class="btn btn-primary" (click)="onSubmit()">Save</button>
+</div>

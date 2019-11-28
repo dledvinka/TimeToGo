@@ -35,6 +35,14 @@ namespace TimeToGo.WebApp.Features.Records
             return asDto;
         }
 
+        [HttpPost]
+        public async Task<MonthlyRecordDto> Save([FromBody]MonthlyRecordDto dto)
+        {
+            var request = new SaveMonthlyRecordRequest() { Data = dto };
+            await _mediator.Send(request);
+            return await Task.FromResult(dto);
+        }
+
         private MonthlyRecordDto Map(MonthlyRecord entity)
         {
             var dto = new MonthlyRecordDto()
@@ -68,13 +76,13 @@ namespace TimeToGo.WebApp.Features.Records
             var dto = new DailyRecordDto()
             {
                 Id = entity.Id,
-                ArrivalTime = entity.ArrivalTime,
-                DailyDeltaInMinutes = entity.DailyDelta.TotalMinutes,
+                Arrived = entity.ArrivalTime?.ToString("HH:mm"),
+                DailyDelta = entity.DailyDelta.ToString(@"hh\:mm"),
                 Day = entity.Day,
-                DeltaFromAccountingSystemInMinutes = entity.DeltaFromAccountingSystem?.TotalMinutes,
+                DeltaFromAccountingSystem = entity.DeltaFromAccountingSystem?.ToString(@"hh\:mm"),
                 IsWorkingDay = entity.IsWorkingDay,
-                LeaveTime = entity.LeaveTime,
-                SpentOutsideInMinutes = entity.SpentOutside?.TotalMinutes
+                Left = entity.LeaveTime?.ToString("HH:mm"),
+                SpentOutside = entity.SpentOutside?.ToString(@"hh\:mm")
             };
 
             return dto;

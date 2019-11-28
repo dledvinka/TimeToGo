@@ -3,29 +3,65 @@
 
     <!-- <p *ngFor="let daily of mr.dailyRecords">{{daily.day}}</p> -->
 
-    <div>
-        <form (ngSubmit)="onSubmit()" [formGroup]="mrForm">
-      
-            <div formArrayName="days"
-            *ngFor="let item of mrForm.get('days').controls; let i = index;">
-            <div [formGroupName]="i">
-              <input formControlName="day" placeholder="Day" type="time">
-            </div>
-          
-            Chosen name: {{ mrForm.controls.items.controls[i].controls.day.value }}
-          </div>
-      
-          <div class="form-row">
-            <button type="submit" [disabled]="!form.valid">Save</button>
-          </div>
-        </form>
-      
-        <div *ngIf="payLoad" class="form-row">
-          <strong>Saved the following values</strong><br>{{payLoad}}
+    <form [formGroup]="mrForm" (ngSubmit)="onSubmit()">
+      <!-- <div formGroupName="userData">
+        <div class="form-group">
+          <label for="username">User name</label>
+          <input type="text" id="username" formControlName="username" class="form-control">
+          <span *ngIf="!mrForm.get('userData.username').valid && mrForm.get('userData.username').touched" class="help-block">Please enter a valid username!</span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" formControlName="email" class="form-control">
+          <span *ngIf="!mrForm.get('userData.email').valid && mrForm.get('userData.email').touched" class="help-block">Please enter a valid email!</span>
         </div>
       </div>
+      <div class="radio" *ngFor="let gender of genders">
+        <label>
+          <input type="radio" formControlName="gender" [value]="gender">{{gender}}
+        </label>
+      </div>
+      <div formArrayName="hobbies">
+        <h4>Hobbies</h4>
+        <button class="btn btn-default" type="button" (click)="onAddHobby()">Add hobby</button>
 
-    
+        <div class="form-group" *ngFor="let hobbyControl of getControls(); let i = index">
+          <input type="text" class="form-control" [formControlName]="i">
+        </div>
+      </div> -->
+
+      <div formGroupName="dailyRecords">
+        <h4>Daily records</h4>
+        <table>
+          <tr>
+              <th>Day</th>
+            <th>Arrival</th>
+            <th>Leave</th>
+            <th>Spent outside</th>
+          </tr>
+          <tr class="form-group" *ngFor="let dailyRecordControl of getDailyRecordsControls(); let i = index">
+              <ng-container [formGroupName]="i">
+                  <td>
+                      {{mr.dailyRecords[i].day}}
+                  </td>  
+                <td>
+                      <input type="time" class="form-control" formControlName="arrival">
+                  </td>
+                  <td>
+                      <input type="time" class="form-control" formControlName="leave">
+                  </td>
+                  <td>
+                      <input type="time" class="form-control" formControlName="spentOutside">
+                  </td>
+              </ng-container>
+            </tr>
+        </table>
+        
+      </div>
+
+      <span *ngIf="!mrForm.valid && mrForm.touched" class="help-block">Please enter valid data!</span>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
 </div>
 
 <p>monthly-record-editor works!</p>
