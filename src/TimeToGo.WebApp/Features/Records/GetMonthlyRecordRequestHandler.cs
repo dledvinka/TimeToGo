@@ -26,6 +26,7 @@ namespace TimeToGo.WebApp.Features.Records
 
             var monthly = _dbContext.MonthlyRecords
                 .Include(mr => mr.DailyRecords)
+                .Include(mr => mr.User)
                 .AsNoTracking()
                 .FirstOrDefault(mr => mr.Year == request.Year && mr.Month == request.Month);
 
@@ -50,6 +51,11 @@ namespace TimeToGo.WebApp.Features.Records
                 _dbContext.Add(monthly);
                 _dbContext.SaveChanges();
             }
+            else
+            {
+                monthly.DailyRecords = monthly.DailyRecords.OrderBy(dr => dr.Day).ToList();
+            }
+
 
             return Task.FromResult(monthly);
         }

@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TimeToGo.WebApp.Data;
+using TimeToGo.WebApp.Dtos;
+using TimeToGo.WebApp.Entities;
 
 namespace TimeToGo.WebApp
 {
@@ -27,6 +29,10 @@ namespace TimeToGo.WebApp
             services.AddEntityFrameworkSqlite().AddDbContext<TimeToGoContext>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //services.AddAutoMapper((IMapperConfigurationExpression configAction) =>
+            //{
+            //    configAction.CreateMap<MonthlyRecord, MonthlyRecordDto>().ForMember()
+            //});
 
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 

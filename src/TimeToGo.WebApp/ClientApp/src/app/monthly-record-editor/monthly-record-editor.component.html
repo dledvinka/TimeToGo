@@ -1,1 +1,32 @@
+<div *ngIf="mr$ | async as mr">
+    <h1>{{mr.year}}/{{mr.month}}</h1>
+
+    <!-- <p *ngFor="let daily of mr.dailyRecords">{{daily.day}}</p> -->
+
+    <div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="mrForm">
+      
+            <div formArrayName="days"
+            *ngFor="let item of mrForm.get('days').controls; let i = index;">
+            <div [formGroupName]="i">
+              <input formControlName="day" placeholder="Day" type="time">
+            </div>
+          
+            Chosen name: {{ mrForm.controls.items.controls[i].controls.day.value }}
+          </div>
+      
+          <div class="form-row">
+            <button type="submit" [disabled]="!form.valid">Save</button>
+          </div>
+        </form>
+      
+        <div *ngIf="payLoad" class="form-row">
+          <strong>Saved the following values</strong><br>{{payLoad}}
+        </div>
+      </div>
+
+    
+</div>
+
 <p>monthly-record-editor works!</p>
+

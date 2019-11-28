@@ -1,4 +1,9 @@
 interface MonthlyRecordDto {
-    year: number;
-    month: number;
-  }
+  id: number;
+  year: number;
+  month: number;
+  dailyRecords: DailyRecordDto[];
+  overtimeFromPreviousMonthInMinutes: number;
+  monthlyDeltaInMinutes: number;
+  user: UserDto;
+}
