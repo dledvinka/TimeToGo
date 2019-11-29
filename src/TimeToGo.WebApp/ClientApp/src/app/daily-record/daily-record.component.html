@@ -2,24 +2,24 @@
     {{data.day}}
 </td>
 <td>
-    <input type="time" class="form-control" [value]="data.arrived" (input)="data.arrived = $event.target.value">
+    <input type="time" class="form-control" [value]="data.arrived" (input)="onArrivedChanged($event.target.value)">
 
     <!-- <input type="time" class="form-control" [(ngModel)]="dr.arrivalTimeString"> -->
 </td>
 <td>
-    <input type="time" class="form-control" [value]="data.left" (input)="data.left = $event.target.value">
+    <input type="time" class="form-control" [value]="data.left" (input)="onLeftChanged($event.target.value)">
 </td>
 <td>
     <input type="time" class="form-control" [value]="data.spentOutside"
-        (input)="data.spentOutside = $event.target.value">
+        (input)="onSpentOutsideChanged($event.target.value)">
 </td>
 <td>
     <input type="text" class="form-control" [value]="data.deltaFromAccountingSystem"
-        (input)="data.deltaFromAccountingSystem = $event.target.value">
+        (input)="onDeltaFromAccountingSystemChanged($event.target.value)">
 </td>
 <td>
     {{data.dailyDelta}}
 </td>
 <td>
-    <input type="checkbox" class="form-control" [checked]="data.isWorkingDay">
+    <input type="checkbox" class="form-control" [checked]="data.isWorkingDay" (change)="isWorkingDayChanged($event)">
 </td>

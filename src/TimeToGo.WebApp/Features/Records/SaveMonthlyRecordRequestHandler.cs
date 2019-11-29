@@ -36,6 +36,8 @@ namespace TimeToGo.WebApp.Features.Records
                 daily.ArrivalTime = DateTimeFromString(monthly.Year, monthly.Month, daily.Day, dailyDto.Arrived);
                 daily.LeaveTime = DateTimeFromString(monthly.Year, monthly.Month, daily.Day, dailyDto.Left);
                 daily.SpentOutside = TimeSpanFromString(dailyDto.SpentOutside);
+                daily.DeltaFromAccountingSystem = TimeSpanFromString(dailyDto.DeltaFromAccountingSystem);
+                daily.IsWorkingDay = dailyDto.IsWorkingDay;
             }
 
             _dbContext.SaveChanges();
@@ -45,7 +47,7 @@ namespace TimeToGo.WebApp.Features.Records
 
         private DateTime? DateTimeFromString(int year, int month, int day, string dt)
         {
-            if (dt == null)
+            if (dt == null || string.IsNullOrWhiteSpace(dt))
             {
                 return null;
             }
@@ -64,9 +66,11 @@ namespace TimeToGo.WebApp.Features.Records
             }
 
             var split = dt.Split(":");
+            int multiplier = split[0].Contains("-") ? -1 : 1;
+            split[0] = split[0].Replace("-", string.Empty);
             int hour = Int32.Parse(split[0]);
             int minute = Int32.Parse(split[1]);
-            int totalMinutes = hour * 60 + minute;
+            int totalMinutes = multiplier * (hour * 60 + minute);
             return TimeSpan.FromMinutes(totalMinutes);
         }
     }
