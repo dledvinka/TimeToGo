@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { MonthlyRecordEditorComponent } from './monthly-record-editor/monthly-record-editor.component';
 import { MonthlyRecordComponent } from './monthly-record/monthly-record.component';
+import { DailyRecordComponent } from './daily-record/daily-record.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MonthlyRecordComponent } from './monthly-record/monthly-record.componen
     CounterComponent,
     FetchDataComponent,
     MonthlyRecordEditorComponent,
-    MonthlyRecordComponent
+    MonthlyRecordComponent,
+    DailyRecordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

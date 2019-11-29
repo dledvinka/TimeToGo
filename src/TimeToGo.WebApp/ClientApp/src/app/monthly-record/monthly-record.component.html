@@ -11,15 +11,18 @@
             <th>Daily delta</th>
             <th>Working day</th>
         </tr>
+        //https://stackoverflow.com/questions/34556277/angular2-table-rows-as-component
         <tr class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
+            <app-daily-record [data]="dr"></app-daily-record>
+        </tr>
+        
+        <!-- <tr class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
             <td>
                 {{dr.day}}
             </td>
             <td>
                 <input type="time" class="form-control" [value]="dr.arrived"
                     (input)="dr.arrived = $event.target.value">
-
-                    <!-- <input type="time" class="form-control" [(ngModel)]="dr.arrivalTimeString"> -->
             </td>
             <td>
                 <input type="time" class="form-control" [value]="dr.left"
@@ -39,7 +42,7 @@
             <td>
                     <input type="checkbox" class="form-control" [value]="isWorkingDay">
                 </td>
-        </tr>
+        </tr> -->
     </table>
     <button class="btn btn-primary" (click)="onSubmit()">Save</button>
 </div>
