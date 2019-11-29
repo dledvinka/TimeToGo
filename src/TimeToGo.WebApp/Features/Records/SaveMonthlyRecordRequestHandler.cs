@@ -28,6 +28,8 @@ namespace TimeToGo.WebApp.Features.Records
                 //.Include(mr => mr.User)
                 .FirstOrDefault(mr => mr.Id == dto.Id);
 
+            monthly.OvertimeFromPreviousMonth = TimeSpanFromString(dto.OvertimeFromPreviousMonth);
+
             foreach (var dailyDto in dto.DailyRecords)
             {
                 var daily = monthly.DailyRecords.Single(dr => dr.Id == dailyDto.Id);
@@ -56,7 +58,7 @@ namespace TimeToGo.WebApp.Features.Records
 
         private TimeSpan TimeSpanFromString(string dt)
         {
-            if (dt == null)
+            if (dt == null || string.IsNullOrWhiteSpace(dt))
             {
                 return TimeSpan.Zero;
             }

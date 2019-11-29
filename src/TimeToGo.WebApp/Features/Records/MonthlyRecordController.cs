@@ -50,8 +50,8 @@ namespace TimeToGo.WebApp.Features.Records
                 Id = entity.Id,
                 Year = entity.Year,
                 Month = entity.Month,
-                MonthlyDeltaInMinutes = entity.MonthlyDelta.TotalMinutes,
-                OvertimeFromPreviousMonthInMinutes = entity.OvertimeFromPreviousMonth.TotalMinutes,
+                MonthlyDelta = TimeSpanToString(entity.MonthlyDelta),
+                OvertimeFromPreviousMonth = TimeSpanToString(entity.OvertimeFromPreviousMonth),
                 User = Map(entity.User),
                 DailyRecords = entity.DailyRecords.Select(dr => Map(dr)).ToList()
             };
@@ -77,15 +77,28 @@ namespace TimeToGo.WebApp.Features.Records
             {
                 Id = entity.Id,
                 Arrived = entity.ArrivalTime?.ToString("HH:mm"),
-                DailyDelta = entity.DailyDelta.ToString(@"hh\:mm"),
+                DailyDelta = TimeSpanToString(entity.DailyDelta),
                 Day = entity.Day,
-                DeltaFromAccountingSystem = entity.DeltaFromAccountingSystem?.ToString(@"hh\:mm"),
+                DeltaFromAccountingSystem = TimeSpanToString(entity.DeltaFromAccountingSystem),
                 IsWorkingDay = entity.IsWorkingDay,
                 Left = entity.LeaveTime?.ToString("HH:mm"),
-                SpentOutside = entity.SpentOutside?.ToString(@"hh\:mm")
+                SpentOutside = TimeSpanToString(entity.SpentOutside)
             };
 
             return dto;
+        }
+
+        private string TimeSpanToString(TimeSpan? ts)
+        {
+            if (ts == null)
+            {
+                return string.Empty;
+            }
+
+            string result = ts.Value.TotalSeconds < 0 ? "-" : string.Empty;
+            result += ts.Value.ToString(@"hh\:mm");
+
+            return result;
         }
     }
 }

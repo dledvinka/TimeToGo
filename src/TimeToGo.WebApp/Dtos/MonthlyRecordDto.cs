@@ -11,8 +11,8 @@ namespace TimeToGo.WebApp.Dtos
         public int Year { get; set; }
         public int Month { get; set; }
         public List<DailyRecordDto> DailyRecords { get; set; }
-        public double OvertimeFromPreviousMonthInMinutes { get; set; }
-        public double MonthlyDeltaInMinutes { get; set; }
+        public string OvertimeFromPreviousMonth { get; set; }
+        public string MonthlyDelta { get; set; }
         public UserDto User { get; set; }
     }
 }

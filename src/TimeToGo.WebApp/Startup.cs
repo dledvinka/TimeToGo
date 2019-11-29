@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using TimeToGo.WebApp.Data;
 using TimeToGo.WebApp.Dtos;
 using TimeToGo.WebApp.Entities;
+using TimeToGo.WebApp.Features.Records;
 
 namespace TimeToGo.WebApp
 {
@@ -35,6 +36,9 @@ namespace TimeToGo.WebApp
             //});
 
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSingleton<IDailyDeltaCalculator, DailyDeltaCalculator>();
+            services.AddSingleton<IMonthlyDeltaCalculator, MonthlyDeltaCalculator>();
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

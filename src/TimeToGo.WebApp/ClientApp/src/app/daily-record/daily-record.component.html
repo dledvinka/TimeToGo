@@ -1,29 +1,25 @@
-<!-- <tr class="form-group"> -->
-    <td>
-        {{dr.day}}
-    </td>
-    <td>
-        <input type="time" class="form-control" [value]="data.arrived"
-            (input)="data.arrived = $event.target.value">
+<td>
+    {{data.day}}
+</td>
+<td>
+    <input type="time" class="form-control" [value]="data.arrived" (input)="data.arrived = $event.target.value">
 
-            <!-- <input type="time" class="form-control" [(ngModel)]="dr.arrivalTimeString"> -->
-    </td>
-    <td>
-        <input type="time" class="form-control" [value]="data.left"
-            (input)="data.left = $event.target.value">
-    </td>
-    <td>
-        <input type="time" class="form-control" [value]="data.spentOutside"
-            (input)="data.spentOutside = $event.target.value">
-    </td>
-    <td>
-        <input type="time" class="form-control" [value]="data.deltaFromAccountingSystem"
-            (input)="data.deltaFromAccountingSystem = $event.target.value">
-    </td>
-    <td>
-        {{data.dailyDelta}}
-    </td>
-    <td>
-            <input type="checkbox" class="form-control" [value]="data.isWorkingDay">
-        </td>
-<!-- </tr> -->
+    <!-- <input type="time" class="form-control" [(ngModel)]="dr.arrivalTimeString"> -->
+</td>
+<td>
+    <input type="time" class="form-control" [value]="data.left" (input)="data.left = $event.target.value">
+</td>
+<td>
+    <input type="time" class="form-control" [value]="data.spentOutside"
+        (input)="data.spentOutside = $event.target.value">
+</td>
+<td>
+    <input type="text" class="form-control" [value]="data.deltaFromAccountingSystem"
+        (input)="data.deltaFromAccountingSystem = $event.target.value">
+</td>
+<td>
+    {{data.dailyDelta}}
+</td>
+<td>
+    <input type="checkbox" class="form-control" [checked]="data.isWorkingDay">
+</td>

@@ -3,7 +3,7 @@ interface MonthlyRecordDto {
   year: number;
   month: number;
   dailyRecords: DailyRecordDto[];
-  overtimeFromPreviousMonthInMinutes: number;
-  monthlyDeltaInMinutes: number;
+  overtimeFromPreviousMonth: string;
+  monthlyDelta: string;
   user: UserDto;
 }

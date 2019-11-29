@@ -14,10 +14,14 @@ namespace TimeToGo.WebApp.Features.Records
     public class GetMonthlyRecordRequestHandler : IRequestHandler<GetMonthlyRecordRequest, MonthlyRecord>
     {
         private readonly TimeToGoContext _dbContext;
+        private readonly IDailyDeltaCalculator _dailyDeltaCalculator;
+        private readonly IMonthlyDeltaCalculator _monthlyDeltaCalculator;
 
-        public GetMonthlyRecordRequestHandler(TimeToGoContext dbContext)
+        public GetMonthlyRecordRequestHandler(TimeToGoContext dbContext, IDailyDeltaCalculator dailyDeltaCalculator, IMonthlyDeltaCalculator monthlyDeltaCalculator)
         {
             _dbContext = dbContext;
+            _dailyDeltaCalculator = dailyDeltaCalculator;
+            _monthlyDeltaCalculator = monthlyDeltaCalculator;
         }
         
         public Task<MonthlyRecord> Handle(GetMonthlyRecordRequest request, CancellationToken cancellationToken)
@@ -56,6 +60,12 @@ namespace TimeToGo.WebApp.Features.Records
                 monthly.DailyRecords = monthly.DailyRecords.OrderBy(dr => dr.Day).ToList();
             }
 
+            foreach (var dr in monthly.DailyRecords)
+            {
+                dr.DailyDelta = _dailyDeltaCalculator.GetDailyDelta(dr);
+            }
+
+            monthly.MonthlyDelta = _monthlyDeltaCalculator.GetMonthlyDelta(monthly);
 
             return Task.FromResult(monthly);
         }

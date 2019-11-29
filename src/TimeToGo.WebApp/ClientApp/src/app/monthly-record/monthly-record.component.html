@@ -11,38 +11,16 @@
             <th>Daily delta</th>
             <th>Working day</th>
         </tr>
-        //https://stackoverflow.com/questions/34556277/angular2-table-rows-as-component
-        <tr class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
-            <app-daily-record [data]="dr"></app-daily-record>
+
+        <!-- //https://stackoverflow.com/questions/34556277/angular2-table-rows-as-component -->
+        <tr app-daily-record [data]="dr" class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
         </tr>
-        
-        <!-- <tr class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
-            <td>
-                {{dr.day}}
-            </td>
-            <td>
-                <input type="time" class="form-control" [value]="dr.arrived"
-                    (input)="dr.arrived = $event.target.value">
-            </td>
-            <td>
-                <input type="time" class="form-control" [value]="dr.left"
-                    (input)="dr.left = $event.target.value">
-            </td>
-            <td>
-                <input type="time" class="form-control" [value]="dr.spentOutside"
-                    (input)="dr.spentOutside = $event.target.value">
-            </td>
-            <td>
-                <input type="time" class="form-control" [value]="deltaFromAccountingSystem"
-                    (input)="dr.deltaFromAccountingSystem = $event.target.value">
-            </td>
-            <td>
-                {{dr.dailyDelta}}
-            </td>
-            <td>
-                    <input type="checkbox" class="form-control" [value]="isWorkingDay">
-                </td>
-        </tr> -->
     </table>
+
+    <input type="time" class="form-control" [value]="mr.overtimeFromPreviousMonth"
+        (input)="mr.overtimeFromPreviousMonth = $event.target.value">
+
+    <div>Monthly delta: {{mr.monthlyDelta}}</div>
+
     <button class="btn btn-primary" (click)="onSubmit()">Save</button>
 </div>
