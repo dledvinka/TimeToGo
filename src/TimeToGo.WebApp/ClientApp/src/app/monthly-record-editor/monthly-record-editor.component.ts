@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MonthlyRecordService } from '../services/monthly-record.service';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { MonthlyRecordDto } from '../dtos/dtos';
 
 @Component({
   selector: 'app-monthly-record-editor',
