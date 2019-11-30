@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { DeltaCalculationService } from './delta-calculation.service';
 import { DailyRecordDto } from '../dtos/dtos';
+import { Time } from './time';
 
 describe('DeltaCalculationService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
@@ -24,7 +25,8 @@ describe('DeltaCalculationService', () => {
       dailyDelta: null
     };
     const result = service.getDailyDelta(dailyRecord);
-    expect(result.value).toBe('1:00');
+    expect(result.value).toEqual(new Time(1, 1, 0));
+    expect(result.asString).toBe('1:00');
   });
 
   it('should return correct negative daily delta when simulating working day', () => {
@@ -40,7 +42,8 @@ describe('DeltaCalculationService', () => {
       dailyDelta: null
     };
     const result = service.getDailyDelta(dailyRecord);
-    expect(result.value).toBe('-1:00');
+    expect(result.value).toEqual(new Time(-1, 1, 0));
+    expect(result.asString).toBe('-1:00');
   });
 
   it('should return empty value if not a working day', () => {
@@ -56,7 +59,8 @@ describe('DeltaCalculationService', () => {
       dailyDelta: null
     };
     const result = service.getDailyDelta(dailyRecord);
-    expect(result.value).toBe('');
+    expect(result.value).toEqual(new Time(1, 0, 0));
+    expect(result.asString).toBe('0:00');
   });
 
   it('should return correct daily delta when delta given by accounting system', () => {
@@ -72,6 +76,7 @@ describe('DeltaCalculationService', () => {
       dailyDelta: null
     };
     const result = service.getDailyDelta(dailyRecord);
-    expect(result.value).toBe('-1:00');
+    expect(result.value).toEqual(new Time(-1, 1, 0));
+    expect(result.asString).toBe('-1:00');
   });
 });
