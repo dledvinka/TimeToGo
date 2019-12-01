@@ -15,6 +15,5 @@ namespace TimeToGo.WebApp.Dtos
         public string SpentOutside { get; set; }
         public string DeltaFromAccountingSystem { get; set; }
         public bool IsWorkingDay { get; set; }
-        public string DailyDelta { get; set; }
     }
 }

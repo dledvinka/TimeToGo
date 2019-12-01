@@ -21,8 +21,7 @@ describe('DeltaCalculationService', () => {
       spentOutside: '0:30',
       day: 1,
       isWorkingDay: true,
-      deltaFromAccountingSystem: null,
-      dailyDelta: null
+      deltaFromAccountingSystem: null
     };
     const result = service.getDailyDelta(dailyRecord);
     expect(result.value).toEqual(new Time(1, 1, 0));
@@ -38,8 +37,7 @@ describe('DeltaCalculationService', () => {
       spentOutside: '0:30',
       day: 1,
       isWorkingDay: true,
-      deltaFromAccountingSystem: null,
-      dailyDelta: null
+      deltaFromAccountingSystem: null
     };
     const result = service.getDailyDelta(dailyRecord);
     expect(result.value).toEqual(new Time(-1, 1, 0));
@@ -55,8 +53,7 @@ describe('DeltaCalculationService', () => {
       spentOutside: '',
       day: 1,
       isWorkingDay: false,
-      deltaFromAccountingSystem: null,
-      dailyDelta: null
+      deltaFromAccountingSystem: null
     };
     const result = service.getDailyDelta(dailyRecord);
     expect(result.value).toEqual(new Time(1, 0, 0));
@@ -72,8 +69,7 @@ describe('DeltaCalculationService', () => {
       spentOutside: '',
       day: 1,
       isWorkingDay: true,
-      deltaFromAccountingSystem: '-1:00',
-      dailyDelta: null
+      deltaFromAccountingSystem: '-1:00'
     };
     const result = service.getDailyDelta(dailyRecord);
     expect(result.value).toEqual(new Time(-1, 1, 0));

@@ -31,8 +31,14 @@ export class DeltaCalculationService {
     return { value: delta, asString: delta.asString() };
   }
 
-  getMonthlyDelta(monthlyRecord: MonthlyRecordDto): MothlyDelta {
-    return { value: Time.zero, asString: Time.zero.asString() };
+  getMonthlyDelta(overtimeFromPreviousMonth: Time, dailyDeltas: DailyDelta[]): MonthlyDelta {
+    let monthlyDelta = overtimeFromPreviousMonth;
+
+    for (let index = 0; index < dailyDeltas.length; index++) {
+      const dd = dailyDeltas[index];
+      monthlyDelta = monthlyDelta.add(dd.value);
+    }
+    return { value: monthlyDelta, asString: monthlyDelta.asString() };
   }
 }
 
@@ -41,7 +47,7 @@ export interface DailyDelta {
   asString: string;
 }
 
-export interface MothlyDelta {
+export interface MonthlyDelta {
   value: Time,
   asString: string;
 }

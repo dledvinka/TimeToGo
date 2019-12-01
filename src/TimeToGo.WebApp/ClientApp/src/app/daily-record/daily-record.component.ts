@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DailyRecordDto } from '../dtos/dtos';
+import { DailyDelta, DeltaCalculationService } from '../services/delta-calculation.service';
 
 @Component({
   selector: '[app-daily-record]',
@@ -9,25 +10,32 @@ import { DailyRecordDto } from '../dtos/dtos';
 export class DailyRecordComponent implements OnInit {
 
   @Input() data: DailyRecordDto;
+  @Input() dataIndex: number;
+  @Input() delta: DailyDelta;
+  @Output() dailyRecordChanged = new EventEmitter<number>();
   
-  constructor() { }
+  constructor(private deltaService: DeltaCalculationService) { }
 
   ngOnInit() {
+    //this.delta = this.deltaService.getDailyDelta(this.data);
   }
 
   onArrivedChanged(value: string) {
     this.data.arrived = value;
     this.data.deltaFromAccountingSystem = '';
+    this.dailyRecordChanged.emit(this.dataIndex);
   }
 
   onLeftChanged(value: string) {
     this.data.left = value;
     this.data.deltaFromAccountingSystem = '';
+    this.dailyRecordChanged.emit(this.dataIndex);
   }
 
   onSpentOutsideChanged(value: string) {
     this.data.spentOutside = value;
     this.data.deltaFromAccountingSystem = '';
+    this.dailyRecordChanged.emit(this.dataIndex);
   }
 
   onDeltaFromAccountingSystemChanged(value: string) {
@@ -35,6 +43,7 @@ export class DailyRecordComponent implements OnInit {
     this.data.arrived = '';
     this.data.left = '';
     this.data.spentOutside = '';
+    this.dailyRecordChanged.emit(this.dataIndex);
   }
 
   isWorkingDayChanged(event: any) {
@@ -52,11 +61,6 @@ export class DailyRecordComponent implements OnInit {
     }
 
     this.data.isWorkingDay = isChecked;
-    this.data.dailyDelta = this.getDailyDelta(this.data);
+    this.dailyRecordChanged.emit(this.dataIndex);
   }
-
-  getDailyDelta(dailyRecord: DailyRecordDto): string {
-    return '0:00';
-  }
-
 }

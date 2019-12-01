@@ -13,14 +13,14 @@
         </tr>
 
         <!-- //https://stackoverflow.com/questions/34556277/angular2-table-rows-as-component -->
-        <tr app-daily-record [data]="dr" class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
+        <tr app-daily-record [data]="dr" [dataIndex]="i" [delta]="dailyDeltas[i]" (dailyRecordChanged)="onDailyRecordChanged($event)" class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
         </tr>
     </table>
 
     <input type="time" class="form-control" [value]="mr.overtimeFromPreviousMonth"
-        (input)="mr.overtimeFromPreviousMonth = $event.target.value">
+        (input)="onOvertimeFromPreviousMonth($event.target.value)">
 
-    <div>Monthly delta: {{mr.monthlyDelta}}</div>
+    <div>Monthly delta: {{monthlyDelta.asString}}</div>
 
     <button class="btn btn-primary" (click)="onSubmit()">Save</button>
 </div>

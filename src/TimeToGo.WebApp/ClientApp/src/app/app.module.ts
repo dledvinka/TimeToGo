@@ -33,7 +33,7 @@ import { DailyRecordComponent } from './daily-record/daily-record.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'monthly-record', component: MonthlyRecordComponent },
-    ])
+    ], { onSameUrlNavigation: 'reload' })
   ],
   providers: [],
   bootstrap: [AppComponent]

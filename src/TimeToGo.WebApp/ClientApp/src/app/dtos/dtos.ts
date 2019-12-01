@@ -6,7 +6,6 @@ export interface DailyRecordDto {
     spentOutside: string;
     deltaFromAccountingSystem: string;
     isWorkingDay: boolean;
-    dailyDelta: string;
 }
 
 export interface MonthlyRecordDto {
@@ -15,7 +14,6 @@ export interface MonthlyRecordDto {
     month: number;
     dailyRecords: DailyRecordDto[];
     overtimeFromPreviousMonth: string;
-    monthlyDelta: string;
     user: UserDto;
 }
 

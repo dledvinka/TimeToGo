@@ -50,7 +50,6 @@ namespace TimeToGo.WebApp.Features.Records
                 Id = entity.Id,
                 Year = entity.Year,
                 Month = entity.Month,
-                MonthlyDelta = TimeSpanToString(entity.MonthlyDelta),
                 OvertimeFromPreviousMonth = TimeSpanToString(entity.OvertimeFromPreviousMonth),
                 User = Map(entity.User),
                 DailyRecords = entity.DailyRecords.Select(dr => Map(dr)).ToList()
@@ -77,7 +76,6 @@ namespace TimeToGo.WebApp.Features.Records
             {
                 Id = entity.Id,
                 Arrived = entity.ArrivalTime?.ToString("HH:mm"),
-                DailyDelta = TimeSpanToString(entity.DailyDelta),
                 Day = entity.Day,
                 DeltaFromAccountingSystem = TimeSpanToString(entity.DeltaFromAccountingSystem),
                 IsWorkingDay = entity.IsWorkingDay,

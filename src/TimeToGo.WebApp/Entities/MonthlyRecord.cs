@@ -13,7 +13,6 @@ namespace TimeToGo.WebApp.Entities
         public int Month { get; set; }
         public List<DailyRecord> DailyRecords { get; set; }
         public TimeSpan OvertimeFromPreviousMonth { get; set; }
-        public TimeSpan MonthlyDelta { get; set; }
         public User User { get; set; }
     }
 }

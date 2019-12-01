@@ -14,14 +14,10 @@ namespace TimeToGo.WebApp.Features.Records
     public class GetMonthlyRecordRequestHandler : IRequestHandler<GetMonthlyRecordRequest, MonthlyRecord>
     {
         private readonly TimeToGoContext _dbContext;
-        private readonly IDailyDeltaCalculator _dailyDeltaCalculator;
-        private readonly IMonthlyDeltaCalculator _monthlyDeltaCalculator;
 
-        public GetMonthlyRecordRequestHandler(TimeToGoContext dbContext, IDailyDeltaCalculator dailyDeltaCalculator, IMonthlyDeltaCalculator monthlyDeltaCalculator)
+        public GetMonthlyRecordRequestHandler(TimeToGoContext dbContext)
         {
             _dbContext = dbContext;
-            _dailyDeltaCalculator = dailyDeltaCalculator;
-            _monthlyDeltaCalculator = monthlyDeltaCalculator;
         }
         
         public Task<MonthlyRecord> Handle(GetMonthlyRecordRequest request, CancellationToken cancellationToken)
@@ -41,14 +37,13 @@ namespace TimeToGo.WebApp.Features.Records
                     Year = request.Year,
                     Month = request.Month,
                     OvertimeFromPreviousMonth = TimeSpan.Zero,
-                    MonthlyDelta = TimeSpan.Zero,
                     User = user,
                     DailyRecords = Enumerable.Range(1, DateTime.DaysInMonth(request.Year, request.Month)).Select(day =>
                     {
                         var dayOfWeek = new DateTime(request.Year, request.Month, day).DayOfWeek;
                         bool isWorkingDay = dayOfWeek != DayOfWeek.Saturday && dayOfWeek != DayOfWeek.Sunday;
 
-                        return new DailyRecord() { Day = day, IsWorkingDay = isWorkingDay, DailyDelta = TimeSpan.Zero };
+                        return new DailyRecord() { Day = day, IsWorkingDay = isWorkingDay };
                     }).ToList()
                 };
 
@@ -59,13 +54,6 @@ namespace TimeToGo.WebApp.Features.Records
             {
                 monthly.DailyRecords = monthly.DailyRecords.OrderBy(dr => dr.Day).ToList();
             }
-
-            foreach (var dr in monthly.DailyRecords)
-            {
-                dr.DailyDelta = _dailyDeltaCalculator.GetDailyDelta(dr);
-            }
-
-            monthly.MonthlyDelta = _monthlyDeltaCalculator.GetMonthlyDelta(monthly);
 
             return Task.FromResult(monthly);
         }
