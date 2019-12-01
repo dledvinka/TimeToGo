@@ -13,7 +13,7 @@ export class DeltaCalculationService {
     const deltaFromAccountingSystem = Time.parse(dailyRecord.deltaFromAccountingSystem);
 
     if (deltaFromAccountingSystem !== Time.zero) {
-      return {value : Time.zero, asString: deltaFromAccountingSystem.asString()};
+      return {value : deltaFromAccountingSystem, asString: deltaFromAccountingSystem.asString()};
     }
     
     const arrived = Time.parse(dailyRecord.arrived);
@@ -26,7 +26,7 @@ export class DeltaCalculationService {
     }
 
     const worked = left.substract(arrived).substract(spentOutside);
-    const delta = dailyWorkingHours.substract(worked);
+    const delta = worked.substract(dailyWorkingHours);
 
     return { value: delta, asString: delta.asString() };
   }
