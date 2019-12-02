@@ -34,6 +34,12 @@ steps:
     workingDir: '$(build.SourcesDirectory)\src\TimeToGo.WebApp\ClientApp\'
     customCommand: 'run test-headless'
 
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+    mergeTestResults: true
+
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
