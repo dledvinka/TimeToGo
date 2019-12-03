@@ -29,6 +29,7 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: Npm@1
+  displayName: "Angular: Karma tests"
   inputs:
     command: 'custom'
     workingDir: '$(build.SourcesDirectory)\src\TimeToGo.WebApp\ClientApp\'
@@ -37,10 +38,11 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '**/TESTS-*.xml'
     mergeTestResults: true
 
 - task: VSTest@2
+  enabled: false
   inputs:
     testSelector: 'testAssemblies'
     platform: '$(buildPlatform)'
