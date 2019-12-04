@@ -16,7 +16,7 @@
                         [value]="mr.overtimeFromPreviousMonth"
                         (input)="onOvertimeFromPreviousMonth($event.target.value)">
                 </td>
-                <td [ngClass]="{'bg-success': monthlyDelta.value.multiplier > 0}"> 
+                <td [ngClass]="{'bg-success': monthlyDelta.value.multiplier > 0, 'bg-danger': monthlyDelta.value.multiplier < 0}">
                     <input type="text" class="form-control" id="currentDelta" placeholder="N/A" readonly
                         [value]="monthlyDelta.asString">
                 </td>

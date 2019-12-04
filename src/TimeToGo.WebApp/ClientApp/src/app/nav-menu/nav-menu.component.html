@@ -1,7 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">TIME TO GO</a>
+      <fa-icon [icon]="faBusinessTime" size="2x"></fa-icon>
+      <a class="ml-2 navbar-brand" [routerLink]="['/']">Time to go</a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
         aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
