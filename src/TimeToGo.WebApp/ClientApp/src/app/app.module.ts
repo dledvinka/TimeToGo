@@ -29,10 +29,7 @@ import { DailyRecordComponent } from './daily-record/daily-record.component';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'monthly-record', component: MonthlyRecordComponent },
+      { path: '', component: MonthlyRecordComponent, pathMatch: 'full' }
     ], { onSameUrlNavigation: 'reload' })
   ],
   providers: [],

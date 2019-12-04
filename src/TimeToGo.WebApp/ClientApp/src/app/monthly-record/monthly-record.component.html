@@ -1,26 +1,57 @@
 <div *ngIf="mr">
-    <h1>{{mr.year}}/{{mr.month}}</h1>
-    <h4>Daily records</h4>
-    <table>
-        <tr>
-            <th>Day</th>
-            <th>Arrival</th>
-            <th>Leave</th>
-            <th>Spent outside</th>
-            <th>Delta</th>
-            <th>Daily delta</th>
-            <th>Working day</th>
-        </tr>
+    <h4>Daily records {{mr.year}}/{{mr.month}}</h4>
 
-        <!-- //https://stackoverflow.com/questions/34556277/angular2-table-rows-as-component -->
-        <tr app-daily-record [data]="dr" [dataIndex]="i" [delta]="dailyDeltas[i]" (dailyRecordChanged)="onDailyRecordChanged($event)" class="form-group" *ngFor="let dr of mr.dailyRecords; let i = index">
-        </tr>
+    <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Overtime from previous month</th>
+                <th scope="col">Current delta</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="time" class="form-control mb-2 mr-sm-2" id="overtimeFromPreviousMonth"
+                        [value]="mr.overtimeFromPreviousMonth"
+                        (input)="onOvertimeFromPreviousMonth($event.target.value)">
+                </td>
+                <td [ngClass]="{'bg-success': monthlyDelta.value.multiplier > 0}"> 
+                    <input type="text" class="form-control" id="currentDelta" placeholder="N/A" readonly
+                        [value]="monthlyDelta.asString">
+                </td>
+                <td>
+                    <button class="btn btn-primary mb-2" (click)="onSubmit()">Save</button>
+                </td>
+            </tr>
+        </tbody>
     </table>
 
-    <input type="time" class="form-control" [value]="mr.overtimeFromPreviousMonth"
+    <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Arrival</th>
+                <th scope="col">Leave</th>
+                <th scope="col">Spent outside</th>
+                <th scope="col">Delta</th>
+                <th scope="col">Daily delta</th>
+                <th scope="col">Working day</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- //https://stackoverflow.com/questions/34556277/angular2-table-rows-as-component -->
+            <tr app-daily-record [data]="dr" [dataIndex]="i" [delta]="dailyDeltas[i]"
+                (dailyRecordChanged)="onDailyRecordChanged($event)" class="form-group"
+                [ngClass]="{'table-secondary': !dr.isWorkingDay }" *ngFor="let dr of mr.dailyRecords; let i = index">
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <input type="time" class="form-control" [value]="mr.overtimeFromPreviousMonth"
         (input)="onOvertimeFromPreviousMonth($event.target.value)">
 
     <div>Monthly delta: {{monthlyDelta.asString}}</div>
 
-    <button class="btn btn-primary" (click)="onSubmit()">Save</button>
+    <button class="btn btn-primary" (click)="onSubmit()">Save</button> -->
 </div>

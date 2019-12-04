@@ -1,6 +1,4 @@
-<td>
-    {{data.day}}
-</td>
+<th scope="row">{{data.day}}</th>
 <td>
     <input type="time" class="form-control" [value]="data.arrived" [disabled]="!data.isWorkingDay"
         (input)="onArrivedChanged($event.target.value)">
@@ -16,12 +14,12 @@
         (input)="onSpentOutsideChanged($event.target.value)">
 </td>
 <td>
-    <input type="text" class="form-control" [value]="data.deltaFromAccountingSystem" [disabled]="!data.isWorkingDay"
+    <input type="text" class="form-control right-aligned-text" [value]="data.deltaFromAccountingSystem" [disabled]="!data.isWorkingDay"
         (input)="onDeltaFromAccountingSystemChanged($event.target.value)">
 </td>
 <td>
-    {{delta.asString}}
+    <input type="text" class="form-control right-aligned-text" placeholder="N/A" readonly [value]="delta.asString">
 </td>
 <td>
-    <input type="checkbox" class="form-control" [checked]="data.isWorkingDay" (change)="isWorkingDayChanged($event)">
+    <input type="checkbox" class="form-check-input ml-3 mt-2" [checked]="data.isWorkingDay" (change)="isWorkingDayChanged($event)">
 </td>
