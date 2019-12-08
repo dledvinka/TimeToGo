@@ -28,15 +28,15 @@ namespace TimeToGo.WebApp.Features.Records
                 //.Include(mr => mr.User)
                 .FirstOrDefault(mr => mr.Id == dto.Id);
 
-            monthly.OvertimeFromPreviousMonth = TimeSpanFromString(dto.OvertimeFromPreviousMonth);
+            monthly.OvertimeFromPreviousMonth = TimeSpanFromString(dto.OvertimeFromPreviousMonth, false).Value;
 
             foreach (var dailyDto in dto.DailyRecords)
             {
                 var daily = monthly.DailyRecords.Single(dr => dr.Id == dailyDto.Id);
                 daily.ArrivalTime = DateTimeFromString(monthly.Year, monthly.Month, daily.Day, dailyDto.Arrived);
                 daily.LeaveTime = DateTimeFromString(monthly.Year, monthly.Month, daily.Day, dailyDto.Left);
-                daily.SpentOutside = TimeSpanFromString(dailyDto.SpentOutside);
-                daily.DeltaFromAccountingSystem = TimeSpanFromString(dailyDto.DeltaFromAccountingSystem);
+                daily.SpentOutside = TimeSpanFromString(dailyDto.SpentOutside, false);
+                daily.DeltaFromAccountingSystem = TimeSpanFromString(dailyDto.DeltaFromAccountingSystem, true);
                 daily.IsWorkingDay = dailyDto.IsWorkingDay;
             }
 
@@ -58,11 +58,11 @@ namespace TimeToGo.WebApp.Features.Records
             return new DateTime(year, month, day, hour, minute, 0);
         }
 
-        private TimeSpan TimeSpanFromString(string dt)
+        private TimeSpan? TimeSpanFromString(string dt, bool allowNull)
         {
             if (dt == null || string.IsNullOrWhiteSpace(dt))
             {
-                return TimeSpan.Zero;
+                return allowNull ? default(TimeSpan?) : TimeSpan.Zero;
             }
 
             var split = dt.Split(":");
