@@ -11,7 +11,6 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { MonthlyRecordEditorComponent } from './monthly-record-editor/monthly-record-editor.component';
 import { MonthlyRecordComponent } from './monthly-record/monthly-record.component';
 import { DailyRecordComponent } from './daily-record/daily-record.component';
 
@@ -22,7 +21,6 @@ import { DailyRecordComponent } from './daily-record/daily-record.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    MonthlyRecordEditorComponent,
     MonthlyRecordComponent,
     DailyRecordComponent
   ],

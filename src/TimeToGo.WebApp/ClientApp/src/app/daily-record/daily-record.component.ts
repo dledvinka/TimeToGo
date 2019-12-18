@@ -48,7 +48,6 @@ export class DailyRecordComponent implements OnInit {
 
   isWorkingDayChanged(event: any) {
     const isChecked = event.target.checked;
-    console.log('isChecked', isChecked);
 
     if (!isChecked) {
       this.data.arrived = '';

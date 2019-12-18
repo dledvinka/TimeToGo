@@ -27,7 +27,6 @@ export class MonthlyRecordComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('onSubmit', this.mr);
     this.monthlyRecordService.saveMonth(this.mr);
     this.loadData();
   }
@@ -35,20 +34,15 @@ export class MonthlyRecordComponent implements OnInit {
   loadData(): void {
     this.spinner.show();
     this.monthlyRecordService.getCurrentMonth().subscribe((mr: MonthlyRecordDto) => {
-      console.log('data received', mr);
       this.mr = mr;
 
       this.dailyDeltas = [];
       for (let index = 0; index < mr.dailyRecords.length; index++) {
         const dr = mr.dailyRecords[index];
         this.dailyDeltas[index] = this.deltaService.getDailyDelta(dr);
-        //console.log('index', index, this.dailyDeltas[index]);
       }
       const overtimeFromPreviousMonth = Time.parse(this.mr.overtimeFromPreviousMonth);
       this.monthlyDelta = this.deltaService.getMonthlyDelta(overtimeFromPreviousMonth, this.dailyDeltas);
-
-      console.log('ot', overtimeFromPreviousMonth);
-      console.log('dd', this.dailyDeltas);
 
       setTimeout(() => {
         this.spinner.hide();
