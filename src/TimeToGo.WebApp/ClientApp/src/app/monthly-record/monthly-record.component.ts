@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MonthlyRecordService } from '../services/monthly-record.service';
-import { Observable } from 'rxjs';
 import { MonthlyRecordDto } from '../dtos/dtos';
 import { DeltaCalculationService, DailyDelta, MonthlyDelta } from '../services/delta-calculation.service';
 import { Time } from '../services/time';
-import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-monthly-record',
@@ -20,9 +19,21 @@ export class MonthlyRecordComponent implements OnInit {
   constructor(
     private monthlyRecordService: MonthlyRecordService, 
     private deltaService: DeltaCalculationService, 
-    private router: Router, ) { }
+    private spinner: NgxSpinnerService ) { }
 
   ngOnInit() {
+    this.loadData();
+    
+  }
+
+  onSubmit() {
+    console.log('onSubmit', this.mr);
+    this.monthlyRecordService.saveMonth(this.mr);
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.spinner.show();
     this.monthlyRecordService.getCurrentMonth().subscribe((mr: MonthlyRecordDto) => {
       console.log('data received', mr);
       this.mr = mr;
@@ -38,14 +49,11 @@ export class MonthlyRecordComponent implements OnInit {
 
       console.log('ot', overtimeFromPreviousMonth);
       console.log('dd', this.dailyDeltas);
-    });
-  }
 
-  onSubmit() {
-    console.log('onSubmit', this.mr);
-    this.monthlyRecordService.saveMonth(this.mr);
-    const routerResult = this.router.navigateByUrl("/monthly-record");
-    console.log('routerResult', routerResult);
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 500);
+    });
   }
 
   onDailyRecordChanged(index: number): void {
