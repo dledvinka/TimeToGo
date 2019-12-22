@@ -55,6 +55,11 @@ namespace TimeToGo.WebApp.Features.Records
                 monthly.DailyRecords = monthly.DailyRecords.OrderBy(dr => dr.Day).ToList();
             }
 
+            foreach (var dr in monthly.DailyRecords)
+            {
+                dr.DayOfWeek = new DateTime(monthly.Year, monthly.Month, dr.Day).DayOfWeek.ToString();
+            }
+
             return Task.FromResult(monthly);
         }
     }

@@ -1,4 +1,4 @@
-<th scope="row">{{data.day}}</th>
+<th scope="row">{{data.day}} {{data.dayOfWeek}}</th>
 <td>
     <input type="time" class="form-control" [value]="data.arrived" [disabled]="!data.isWorkingDay"
         (input)="onArrivedChanged($event.target.value)">

@@ -1,6 +1,7 @@
 export interface DailyRecordDto {
     id: number;
     day: number;
+    dayOfWeek: string;
     arrived: string;
     left: string;
     spentOutside: string;

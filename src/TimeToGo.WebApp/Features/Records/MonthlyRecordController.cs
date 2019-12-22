@@ -77,6 +77,7 @@ namespace TimeToGo.WebApp.Features.Records
                 Id = entity.Id,
                 Arrived = entity.ArrivalTime?.ToString("HH:mm"),
                 Day = entity.Day,
+                DayOfWeek = entity.DayOfWeek,
                 DeltaFromAccountingSystem = TimeSpanToString(entity.DeltaFromAccountingSystem),
                 IsWorkingDay = entity.IsWorkingDay,
                 Left = entity.LeaveTime?.ToString("HH:mm"),

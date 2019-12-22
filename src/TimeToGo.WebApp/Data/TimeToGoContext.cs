@@ -20,6 +20,7 @@ namespace TimeToGo.WebApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MonthlyRecord>().HasAlternateKey(e => new { e.Year, e.Month });
+            modelBuilder.Entity<DailyRecord>().Ignore(e => e.DayOfWeek);
         }
     }
 }

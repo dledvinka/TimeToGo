@@ -15,5 +15,6 @@ namespace TimeToGo.WebApp.Entities
         public TimeSpan? SpentOutside { get; set; }
         public TimeSpan? DeltaFromAccountingSystem { get; set; }
         public bool IsWorkingDay { get; internal set; }
+        public string DayOfWeek { get; internal set; }
     }
 }
