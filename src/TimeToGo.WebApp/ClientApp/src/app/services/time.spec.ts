@@ -25,8 +25,12 @@ describe('Time', () => {
     expect(Time.parse('-1:20')).toEqual(new Time(-1, 1, 20));
   });
 
-  it('should correctly parse -01:20', () => {
-    expect(Time.parse('-01:20')).toEqual(new Time(-1, 1, 20));
+  it('should correctly parse -0:28', () => {
+    expect(Time.parse('-0:28')).toEqual(new Time(-1, 0, 28));
+  });
+
+  it('should correctly parse -00:28', () => {
+    expect(Time.parse('-00:28')).toEqual(new Time(-1, 0, 28));
   });
 
   it('should correctly parse 0:00', () => {

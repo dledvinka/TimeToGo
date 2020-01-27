@@ -21,7 +21,8 @@ describe('DeltaCalculationService', () => {
       spentOutside: '0:30',
       day: 1,
       isWorkingDay: true,
-      deltaFromAccountingSystem: null
+      deltaFromAccountingSystem: null,
+      dayOfWeek: 'Mon'
     };
     const result = service.getDailyDelta(dailyRecord);
     expect(result.value).toEqual(new Time(1, 1, 0));
@@ -37,11 +38,29 @@ describe('DeltaCalculationService', () => {
       spentOutside: '0:30',
       day: 1,
       isWorkingDay: true,
-      deltaFromAccountingSystem: null
+      deltaFromAccountingSystem: null,
+      dayOfWeek: 'Mon'
     };
     const result = service.getDailyDelta(dailyRecord);
     expect(result.value).toEqual(new Time(-1, 1, 0));
     expect(result.asString).toBe('-1:00');
+  });
+
+  it('should return correct small negative daily delta when simulating working day', () => {
+    const service: DeltaCalculationService = TestBed.get(DeltaCalculationService);
+    const dailyRecord: DailyRecordDto = {
+      id: 1,
+      arrived:'8:20',
+      left: '16:22',
+      spentOutside: '0:30',
+      day: 1,
+      isWorkingDay: true,
+      deltaFromAccountingSystem: null,
+      dayOfWeek: 'Mon'
+    };
+    const result = service.getDailyDelta(dailyRecord);
+    expect(result.value).toEqual(new Time(-1, 0, 28));
+    expect(result.asString).toBe('-0:28');
   });
 
   it('should return empty value if not a working day', () => {
@@ -53,7 +72,8 @@ describe('DeltaCalculationService', () => {
       spentOutside: '',
       day: 1,
       isWorkingDay: false,
-      deltaFromAccountingSystem: null
+      deltaFromAccountingSystem: null,
+      dayOfWeek: 'Mon'
     };
     const result = service.getDailyDelta(dailyRecord);
     expect(result.value).toEqual(new Time(1, 0, 0));
@@ -69,10 +89,28 @@ describe('DeltaCalculationService', () => {
       spentOutside: '',
       day: 1,
       isWorkingDay: true,
-      deltaFromAccountingSystem: '-1:00'
+      deltaFromAccountingSystem: '-1:00',
+      dayOfWeek: 'Mon'
     };
     const result = service.getDailyDelta(dailyRecord);
     expect(result.value).toEqual(new Time(-1, 1, 0));
     expect(result.asString).toBe('-1:00');
+  });
+
+  it('should return correct small nagative daily delta when delta given by accounting system', () => {
+    const service: DeltaCalculationService = TestBed.get(DeltaCalculationService);
+    const dailyRecord: DailyRecordDto = {
+      id: 1,
+      arrived:'',
+      left: '',
+      spentOutside: '',
+      day: 1,
+      isWorkingDay: true,
+      deltaFromAccountingSystem: '-0:28',
+      dayOfWeek: 'Mon'
+    };
+    const result = service.getDailyDelta(dailyRecord);
+    expect(result.value).toEqual(new Time(-1, 0, 28));
+    expect(result.asString).toBe('-0:28');
   });
 });

@@ -32,7 +32,7 @@ export class Time {
         return this.zero;
       }
 
-      const multiplier = hours < 0 ? -1 : 1;
+      const multiplier = (hours < 0) || (parts[0].includes('-')) ? -1 : 1;
       const absHours = Math.abs(hours);
 
       return new Time(multiplier, absHours, minutes);
