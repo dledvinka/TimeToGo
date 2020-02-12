@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -29,7 +28,6 @@ import { DailyRecordComponent } from './daily-record/daily-record.component';
     FontAwesomeModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxSpinnerModule,
     RouterModule.forRoot([
       { path: '', component: MonthlyRecordComponent, pathMatch: 'full' }
     ], { onSameUrlNavigation: 'reload' })

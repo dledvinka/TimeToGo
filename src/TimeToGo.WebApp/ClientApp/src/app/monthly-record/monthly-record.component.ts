@@ -3,7 +3,6 @@ import { MonthlyRecordService } from '../services/monthly-record.service';
 import { MonthlyRecordDto } from '../dtos/dtos';
 import { DeltaCalculationService, DailyDelta, MonthlyDelta } from '../services/delta-calculation.service';
 import { Time } from '../services/time';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-monthly-record',
@@ -18,12 +17,10 @@ export class MonthlyRecordComponent implements OnInit {
 
   constructor(
     private monthlyRecordService: MonthlyRecordService, 
-    private deltaService: DeltaCalculationService, 
-    private spinner: NgxSpinnerService ) { }
+    private deltaService: DeltaCalculationService) { }
 
   ngOnInit() {
     this.loadData();
-    
   }
 
   onSubmit() {
@@ -32,7 +29,6 @@ export class MonthlyRecordComponent implements OnInit {
   }
 
   loadData(): void {
-    this.spinner.show();
     this.monthlyRecordService.getCurrentMonth().subscribe((mr: MonthlyRecordDto) => {
       this.mr = mr;
 
@@ -43,10 +39,6 @@ export class MonthlyRecordComponent implements OnInit {
       }
       const overtimeFromPreviousMonth = Time.parse(this.mr.overtimeFromPreviousMonth);
       this.monthlyDelta = this.deltaService.getMonthlyDelta(overtimeFromPreviousMonth, this.dailyDeltas);
-
-      setTimeout(() => {
-        this.spinner.hide();
-      }, 500);
     });
   }
 
