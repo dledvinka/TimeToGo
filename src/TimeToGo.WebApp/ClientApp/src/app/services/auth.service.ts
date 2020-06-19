@@ -15,15 +15,17 @@ export class AuthService {
     authority: Constants.stsAuthority,
     client_id: Constants.clientId,
     redirect_uri: `${Constants.clientRoot}/signin-callback`, 
-    scope: 'openid profile',
+    scope: 'openid profile projects-api',
     response_type: 'code', // 'id_token token' (implicit flow),
-    post_logout_redirect_uri: `${Constants.clientRoot}/signout-callback`,
-    // metadata: {
-    //   authorization_endpoint: `${Constants.stsAuthority}/authorize`,
-    //   end_session_endpoint: `${Constants.stsAuthority}/v2/logout`,
-    //   token_endpoint: `${Constants.stsAuthority}/oauth/token`,
-    //   issuer: `${Constants.stsAuthority}/.well-known/openid-configuration`,
-    // }
+    //post_logout_redirect_uri: `${Constants.clientRoot}/signout-callback`,
+    metadata: {
+      issuer: `${Constants.stsAuthority}`,
+      authorization_endpoint: `${Constants.stsAuthority}authorize?audience=projects-api`,
+      jwks_uri: `${Constants.stsAuthority}.well-known/jwks.json`,
+      token_endpoint: `${Constants.stsAuthority}oauth/token`,
+      userinfo_endpoint: `${Constants.stsAuthority}userinfo`,
+      end_session_endpoint: `${Constants.stsAuthority}v2/logout?client_id=${Constants.clientId}&returnTo=${encodeURI(Constants.clientRoot)}/signout-callback`,
+    }
   };
 
   loginChanged = this.loginChangedSubject.asObservable();
