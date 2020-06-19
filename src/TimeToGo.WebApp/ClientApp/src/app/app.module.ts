@@ -12,6 +12,8 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { MonthlyRecordComponent } from './monthly-record/monthly-record.component';
 import { DailyRecordComponent } from './daily-record/daily-record.component';
+import { SigninCallbackComponent } from './auth/signin-callback.component';
+import { SignoutCallbackComponent } from './auth/signout-callback.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { DailyRecordComponent } from './daily-record/daily-record.component';
     CounterComponent,
     FetchDataComponent,
     MonthlyRecordComponent,
-    DailyRecordComponent
+    DailyRecordComponent,
+    SigninCallbackComponent,
+    SignoutCallbackComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,7 +33,9 @@ import { DailyRecordComponent } from './daily-record/daily-record.component';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: MonthlyRecordComponent, pathMatch: 'full' }
+      { path: '', component: MonthlyRecordComponent, pathMatch: 'full' },
+      { path: 'signin-callback', component: SigninCallbackComponent },
+      { path: 'signout-callback', component: SignoutCallbackComponent }
     ], { onSameUrlNavigation: 'reload' })
   ],
   providers: [],

@@ -3,6 +3,7 @@ import { MonthlyRecordService } from '../services/monthly-record.service';
 import { MonthlyRecordDto } from '../dtos/dtos';
 import { DeltaCalculationService, DailyDelta, MonthlyDelta } from '../services/delta-calculation.service';
 import { Time } from '../services/time';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-monthly-record',
@@ -14,13 +15,19 @@ export class MonthlyRecordComponent implements OnInit {
   mr: MonthlyRecordDto;
   dailyDeltas: DailyDelta[];
   monthlyDelta: MonthlyDelta;
+  isLoggedIn = false;
 
   constructor(
     private monthlyRecordService: MonthlyRecordService, 
-    private deltaService: DeltaCalculationService) { }
+    private deltaService: DeltaCalculationService,
+    private authService: AuthService) { 
+      this.authService.loginChanged.subscribe(loggedIn => {
+        this.isLoggedIn = loggedIn;
+      });
+    }
 
   ngOnInit() {
-    this.loadData();
+    //this.loadData();
   }
 
   onSubmit() {

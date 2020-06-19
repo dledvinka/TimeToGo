@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { faBusinessTime } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,6 +10,21 @@ import { faBusinessTime } from '@fortawesome/free-solid-svg-icons';
 export class NavMenuComponent {
   isExpanded = false;
   faBusinessTime = faBusinessTime;
+  isLoggedIn = false;
+
+  constructor(private authService: AuthService) {
+    this.authService.loginChanged.subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+    });
+  }
+
+  login() {
+    this.authService.login();
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 
   collapse() {
     this.isExpanded = false;

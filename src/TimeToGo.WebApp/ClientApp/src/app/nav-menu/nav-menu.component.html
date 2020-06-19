@@ -13,6 +13,11 @@
           <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <!-- <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a> -->
+            <button *ngIf="!isLoggedIn" (click)="login()">Login</button>
+            <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+          </li>
           <!-- <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a>
           </li>
